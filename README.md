@@ -1,6 +1,6 @@
 ### __DESCRIPTION__ 🤖🖥
 
-Similar to BotPress and similar bot building platforms, the aim of this framework is to have a decoupled system where any additional features are implemented in the form of modules. Go-jack is heavily inspired by BotPress
+Similar to BotPress and similar bot building platforms, the aim of this framework is to have a decoupled system where any additional features are implemented in the form of modules. Go-jack is heavily inspired by [BotPress](https://github.com/botpress/botpress)
 
 #
 
@@ -21,14 +21,20 @@ Similar to BotPress and similar bot building platforms, the aim of this framewor
 
 ### __Why Go-Jack__ 🤔
 
-Not seeing suitable bot building frameworks in Golang. While there are tools/frameworks like [Go-sarah]('https://github.com/oklahomer/go-sarah'), they can be quite technical and even not so easy/flexible to pick up for technical people/coders.
+Not seeing suitable bot building frameworks in Golang. While there are tools/frameworks like [Go-sarah](https://github.com/oklahomer/go-sarah), they can be quite technical and even not so easy/flexible to pick up for technical people/coders.
 
 There are also special frameworks targeted at building for specific platforms. But none suitable for building for multiple channels at once, *__separating content from code, and easy to pick up even for non-coders who need to create contents for their bots__*
 #
 
-### __Contributing 📓__
+### __Contributing 🖊__
 
 Of course the project sounds interesting and all that, but I may not get around to it for a really long time (as I am busy and I also have to work on other things apart from this). Therefore, contributions are highly welcome and will be appreciated.
 #
+
+### TO-DO 📓
+
+1. [] Map out the architecture/middleware system
+2. [] Design basic logging system
+3. [] Develop CLI
 
 _If any of the above spark any joy and you'd love to dedicate time to this specially (beyond just few PRs), I'd love to make you (a) maintainer. You can simply say Hi privately 😄_
