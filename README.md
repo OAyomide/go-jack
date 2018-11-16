@@ -33,8 +33,8 @@ Of course the project sounds interesting and all that, but I may not get around 
 
 ### TO-DO 📓
 
-1. [] Map out the architecture/middleware system
-2. [] Design basic logging system
-3. [] Develop CLI
+1. [ ] Map out the architecture/middleware system
+2. [ ] Design basic logging system
+3. [ ] Develop CLI
 
 _If any of the above spark any joy and you'd love to dedicate time to this specially (beyond just few PRs), I'd love to make you (a) maintainer. You can simply say Hi privately 😄_
