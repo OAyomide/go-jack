@@ -15,7 +15,7 @@ func getPort() string {
 
 	if port == "" {
 		port = "3500"
-		fmt.Println("PORT NOT DEFINED FOR THE SERVER. USING THE PORT %s AS THE PORT\n", port)
+		fmt.Printf("PORT NOT DEFINED FOR THE SERVER. USING THE PORT %s AS THE PORT\n", port)
 	}
 	return port
 }
