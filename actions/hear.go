@@ -11,7 +11,7 @@ type hearStruct struct {
 }
 
 //we want to listen to a message that contains the ppts in the struct field
-func (h hearStruct) Hear() string {
+func (h *hearStruct) Hear() string {
 	if h.regex == "" {
 		fmt.Println("Ignoring regex since it isnt present")
 	}
@@ -33,4 +33,9 @@ func (h hearStruct) Hear() string {
 	}
 
 	return ""
+}
+
+//Listen tells the bot to listen for a text
+func Listen(word string) {
+	println(word)
 }
