@@ -36,6 +36,6 @@ Of course the project sounds interesting and all that, but I may not get around 
 1. [ ] Map out the architecture/middleware system
 2. [x] Design basic logging system
 3. [ ] Develop CLI
-4. [ ] Develop basisc server
+4. [ ] Develop basic server
 
 _If any of the above spark any joy and you'd love to dedicate time to this specially (beyond just few PRs), I'd love to make you (a) maintainer. You can simply say Hi privately 😄_
