@@ -1,18 +1,13 @@
 package logger
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"time"
 
 	log "github.com/sirupsen/logrus"
 )
-
-type Logger struct {
-	message string
-	level   string
-}
 
 //a function to apply colorization to our log
 func colorise(level string) {
@@ -24,51 +19,50 @@ func colorise(level string) {
 	l.Warn("This is a warning")
 }
 
-//a function that prints the data we pass to
-func Print(level string, message string, rawdata string) {
+//Print is a function that prints the data we pass to
+func Print(level string, message string, rawdata ...string) {
+	log.SetFormatter(&log.JSONFormatter{PrettyPrint: true, DisableTimestamp: true})
+
 	l := log.WithFields(log.Fields{
-		"[ACTION]": time.Now().Format("2010-01-02 3:4:5 pm"),
+		"[TIMESTAMP]": time.Now().Format("2010-01-02 3:4:5 pm"),
+		"raw":         rawdata,
 	})
 
-	basicEntry := Logger{
-		message: message,
-		level:   level,
-	}
-
-	lg, _ := json.Marshal(basicEntry)
-	logData := string(lg)
 	switch level {
 	case "info":
-		l.Info(logData)
+		l.Info(message)
 
 	case "warning":
-		l.Warning(logData)
+		l.Warning(message)
 
 	case "debug":
-		l.Debug(logData)
+		l.Debug(message)
 
 	case "error":
-		l.Error(logData)
+		l.Error(message)
 	}
 }
 
-//creates the logfile folders 📁
+//CreateLogFolder creates the logfile folders 📁
 func CreateLogFolder(fileName string) {
-	err := os.Mkdir(fileName, 777)
+	err := os.Mkdir("logs"+"/"+fileName, 777)
 
 	if err != nil {
 		Print("error", "Folder creating error", err.Error())
 	}
 }
 
+//CreateLogFile creates the logfiles
 func CreateLogFile(folderName string, fileName string) {
-	_, err := os.Create(fileName)
+	filePath := filepath.FromSlash("logs" + "/" + folderName + "/" + fileName)
+	_, err := os.Create(filePath)
 
 	if err != nil {
 		Print("error", "File not created", err.Error())
 	}
 }
 
+//WriteToLogFile writes to the created LogFile
 func WriteToLogFile(fileName string, data string) {
 	err := ioutil.WriteFile(fileName, []byte(data), 0666)
 

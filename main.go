@@ -1,7 +1,6 @@
 package main
 
 import (
-	"go-jack/actions"
 	"go-jack/logger"
 )
 
@@ -12,7 +11,12 @@ type Bot struct {
 	channel string
 }
 
+func init() {
+	logger.CreateLogFolder("Error")
+	logger.CreateLogFile("Error", "error.critical.log")
+}
 func main() {
-	logger.Print("warning", "Hello, 🦄", " ")
-	actions.Listen("Hello")
+	//for i := 0; i <= 5; i++ {
+	logger.Print("info", "HELLO THERE!!")
+	//}
 }

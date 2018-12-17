@@ -37,5 +37,5 @@ func (h *hearStruct) Hear() string {
 
 //Listen tells the bot to listen for a text
 func Listen(word string) {
-	println(word)
+	fmt.Println(word)
 }
