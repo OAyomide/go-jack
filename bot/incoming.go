@@ -82,6 +82,14 @@ type MessagingStruct struct {
 	OptIn           *OptIn           `json:"optin"`
 	ReferralMessage *ReferralMessage `json:"referral"`
 	AccountLinking  *AccountLinking  `json:"account_linking"`
+	Delivery        *Delivery        `json:"delivery"`
+}
+
+//Entry is the event fired bt webhook that carries other events
+type Entry struct {
+	ID        int64             `json:"id,string"`
+	Time      int64             `json:"time"`
+	Messaging []MessagingStruct `json:"messaging"`
 }
 
 //OptIn is another event from the webhook when user clicks on the checkbox plugin, for example
@@ -94,18 +102,8 @@ type OptIn struct {
 
 //Body is the whole event sent by the webhook
 type Body struct {
-	Object string `json:"object"`
-	Entry  []struct {
-		ID        int64 `json:"id,string"`
-		Time      int64 `json:"time"`
-		Messaging []struct {
-			Timestamp int64
-			Sender    Senderstruct    `json:"sender"`
-			Recipient Recipientstruct `json:"recipient"`
-			Message   *Messagestruct  `json:"message"`
-			Postback  *Postbackstruct `json:"postback"`
-		} `json:"messaging"`
-	} `json:"entry"`
+	Object string  `json:"object"`
+	Entry  []Entry `json:"entry"`
 }
 
 //Delivery is the event sent by the webhook when a message has been delivered

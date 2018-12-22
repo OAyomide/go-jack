@@ -19,19 +19,19 @@ func (x *Config) ReadYml() *Config {
 	configFile, err := filepath.Abs("./bot.config.yml")
 
 	if err != nil {
-		panic(err, "TRYING TO RELATIVELY OPEN FILE PATH")
+		panic(err)
 	}
 
 	yamlFile, err := ioutil.ReadFile(configFile)
 
 	if err != nil {
-		panic(err, "TRYING TO READ CONFIG FILE")
+		panic(err)
 	}
 
 	ymlError := yaml.Unmarshal(yamlFile, &x)
 
 	if ymlError != nil {
-		panic(err, "TRYING TO UNMARSHALL THE CONFIG FILE")
+		panic(err)
 	}
 
 	return x

@@ -1,4 +1,4 @@
-package eventtypes
+package bot
 
 type Event int
 

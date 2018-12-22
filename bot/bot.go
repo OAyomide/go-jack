@@ -83,4 +83,38 @@ func (mes *Messenger) handleFunc(q http.ResponseWriter, t *http.Request) {
 	//mes.dispatch(sc)
 }
 
-func (mes *Messenger) separateEventTypes(ev MessagingStruct)
+//check https://github.com/OAyomide/goblin/blob/ab4dbe668e4604f1e3b4dca453604ca13c1db747/webhook.go#L128
+func (mes *Messenger) fireNecessaryEventHandlers(rec Body) {
+	for _, entries := range rec.Entry {
+		for _, messaging := range entries.Messaging {
+			//here is where we are filter the type of event we're receiving
+			eventType := mes.separateEventTypes(messaging, entries)
+
+			if eventType == UnknownEventType {
+				ErrH(messaging, "Oops!! Dont know that webhook event type")
+				continue
+			}
+		}
+	}
+}
+
+func (mes *Messenger) separateEventTypes(ev MessagingStruct, e Entry) Event {
+	switch ev {
+	case ev.Message != nil:
+		return TextEvent
+	case ev.Postback != nil:
+		return PostBackEvent
+	case ev.Read != nil:
+		return ReadEvent
+	case ev.Delivery != nil:
+		return DeliveryEvent
+	case ev.OptIn != nil:
+		return OptInEvent
+	case ev.AccountLinking != nil:
+		return AccountLinkingEvent
+	case ev.ReferralMessage != nil:
+		return ReferralEvent
+	default:
+		return UnknownEventType
+	}
+}
