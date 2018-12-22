@@ -26,6 +26,18 @@ Not seeing suitable bot building frameworks in Golang. While there are tools/fra
 There are also special frameworks targeted at building for specific platforms. But none suitable for building for multiple channels at once, *__separating content from code, and easy to pick up even for non-coders who need to create contents for their bots__*
 #
 
+### __What has changed__ ❓
+Well, after much thinking, I decided to write the messenger module first. The idea is to write each platform separately starting with Messenger (most conversant), then working out the core that binds them together. In the end, the already written "frameworks" for each channel will be turned into modules. This is why this branch is called *__messenger/poc__*
+
+A major reason I considered this approach is that:
+1. I am having issues figuring out the module system in Go (I've only been writing Go for about 6-7 months.)
+2. I want a separation of concern. Messenger platform has always been my point of interest among all channels (I even work on Messenger bots at my work)
+
+
+After much digging, I have a better insight on how to structure and organize the messenger channel framework first. While a whole lot of codes already written in [Goblin](https://github.com/oayomide/goblin) already work and stable and quite standard, huge props to the [Messenger](https://github.com/paked/messenger) project and the contributors. It not only reinforces the codes I had already written, it serves as a source of inspiriation and ideas. This library is hugely a replica of the project with distinct features.
+
+#
+
 ### __Contributing 🖊__
 
 Of course the project sounds interesting and all that, but I may not get around to it for a really long time (as I am busy and I also have to work on other things apart from this). Therefore, contributions are highly welcome and will be appreciated.
