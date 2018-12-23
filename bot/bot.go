@@ -16,6 +16,13 @@ type Messenger struct {
 	verify        bool
 	appsecret     string
 	verifyhandler func(http.ResponseWriter, *http.Request)
+	messagesHandlers []func(Messagestruct, *Response)
+	postbackHandlers []func(Postbackstruct, *Response)
+}
+
+type Response struct {
+	token string
+	to Recipientstruct
 }
 
 var c parser.Config
@@ -94,7 +101,31 @@ func (mes *Messenger) fireNecessaryEventHandlers(rec Body) {
 				ErrH(messaging, "Oops!! Dont know that webhook event type")
 				continue
 			}
+
+			response := &Response{
+				token: mes.token,
+				to: Recipientstruct{ID: messaging.Sender.ID}
+			}
+
+			switch eventType{
+			case TextEvent:
+				for _, handl := range mes.messagesHandlers{
+					message := *messaging.Message
+					message.Sender = messaging.Sender
+					message.Recipient = messaging.Recipient
+					message.Time = time.Unix(messaging.Timestamp/int64(time.Microsecond), 0)
+					handl(message, response)
+				}
+			}
 		}
+	}
+}
+
+//SendResponse returns the response object
+func (mes *Messenger) SendResponse(to int64) *Response {
+	return &Response{
+		to: Recipientstruct{ID: to},
+		token: mes.token
 	}
 }
 

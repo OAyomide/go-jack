@@ -50,15 +50,22 @@ type Coordinates struct {
 
 //Attachmentstruct is the struct for the attachment webhook event
 type Attachmentstruct struct {
-	Type    string
-	Payload Payloadstruct `json:"-"`
-	Time    time.Time     `json:"-"`
+	Type    string        `json:"type"`
+	Payload Payloadstruct `json:"payload"`
+	Time    time.Time     `json:"time"`
 }
 
 //Messagestruct is the struct for a facebook message
 type Messagestruct struct {
-	Text        string
-	Attachments []*Attachmentstruct
+	Text        string          `json:"text"`
+	Sender      Senderstruct    `json:"-"`
+	Recipient   Recipientstruct `json:"-"`
+	Time        time.Time       `json:"-"`
+	IsEcho      bool            `json:"is_echo,omitempty"`
+	Mid         string          `json:"mid"`
+	Seq         int             `json:"seq"`
+	Attachments []Attachmentstruct
+	QuickReply  *Quickreply `json:"quick_rpely,omitempty`
 }
 
 //Recipientstruct is the struct for the Recipient webhook object
