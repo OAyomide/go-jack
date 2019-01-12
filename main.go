@@ -1,7 +1,8 @@
 package main
 
 import (
-	"go-jack/logger"
+	"flag"
+	"fmt"
 )
 
 //Bot struct is the struct our bot property will be made after
@@ -11,12 +12,18 @@ type Bot struct {
 	channel string
 }
 
-func init() {
-	logger.CreateLogFolder("Error")
-	logger.CreateLogFile("Error", "error.critical.log")
-}
+// func init() {
+// 	logger.CreateLogFolder("error")
+// 	logger.CreateLogFile("error", "error.log")
+// }
+
+// declare our CLI flags
+var (
+	help = flag.String("help", "", "Display the help info about the framework")
+)
+
 func main() {
-	//for i := 0; i <= 5; i++ {
-	logger.Print("info", "HELLO THERE!!")
-	//}
+	flag.Parse()
+
+	fmt.Printf("User inputs: %s", *help)
 }

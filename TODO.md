@@ -1,6 +1,6 @@
 ### TODO
-1. [ ] Implement parser to parse config file.
-2. [ ] Proper logging system.
+1. [x] Implement parser to parse config file.
+2. [x] Proper logging system.
 3. [ ] Simple CLI to create a new project.
 4. [ ] Add simple front-end
 5. [ ] Implement Data persistence using a DB
