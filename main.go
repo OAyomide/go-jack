@@ -54,12 +54,15 @@ func main() {
 			os.Exit(1)
 		}
 	}
+
+	createScaffold(*name)
 }
 
+// this function creates the sample bot based on the https://github.com/paked/messenger/example/basic/main.go
 func createScaffold(foldername string) {
 	// we want to create the folder first
 
-	err := os.Mkdir(foldername, 777)
+	err := os.Mkdir(foldername, 0777)
 
 	if err != nil {
 		logger.Print("error", "Couldn't create folder for the new project", err.Error())
@@ -68,11 +71,13 @@ func createScaffold(foldername string) {
 	// we want to copy the files from our example
 	file, err := os.Create(foldername + "/" + "main.go")
 	if err != nil {
-		logger.Print("error", "Error creating the main.go file")
+		logger.Print("error", "Error creating the main.go file", err.Error())
 	}
 
+	defer file.Close()
+
 	// we want to read the main.go file we're copying from
-	fl, err := os.Open("actions/main.go")
+	fl, err := os.Open("example/main.go")
 	if err != nil {
 		logger.Print("error", "ERROR OPENING THE EXAMPLE main.go FILE", err.Error())
 		return
@@ -92,5 +97,14 @@ func createScaffold(foldername string) {
 	if err != nil {
 		logger.Print("error", "ERROR READING FILE", err.Error())
 		return
+	}
+
+	fmt.Printf("READ THE FOLLOWING FROM THE FILE\n", string(bytesRead))
+
+	// we want to write the file copied from example/main.go to testbot/main.go
+	_, er := file.Write(fileBuffer)
+
+	if er != nil {
+		logger.Print("ERROR WRITING TO THE FILE.", err.Error())
 	}
 }
