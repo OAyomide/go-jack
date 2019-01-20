@@ -1,2 +1,48 @@
-verify_token
-access_token
+verify_token:
+access_token: 
+app_secret: 
+persistent_menu: [
+      {
+        "title":"Uber",
+        "type":"nested",
+        "call_to_actions":[ {
+          "type":"postback",
+          "title":"Check Profile",
+          "payload":"check_user_profile"
+        }, {
+          "type":"postback",
+          "title":"Apply coupon",
+          "payload":"user_coupon_add"
+        }, {
+            "type": "postback",
+            "title": "View trip history",
+            "payload": "history_trip_get"
+              },
+              {
+              "type": "postback",
+              "title": "View current trip",
+              "payload":"current_trip_view"
+            }, 
+        {
+            "title": "More options",
+            "type":"nested",
+            "call_to_actions":[
+              {
+                "type": "postback",
+                "title": "View fav. places",
+                "payload": "places_view_fav"
+              },
+              {
+              "type": "postback",
+              "payload": "CANCELTRIPBUTTON.C1",
+              "title": "Cancel current trip"
+            }]
+          }
+        ]   
+      },
+     {
+        "title": "Menu",
+        "type": "postback",
+        "payload": "TRIPSUCCESSFULL.MENU"
+      }
+    ] # persistent menu is also open to changes. This is a temp data

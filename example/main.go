@@ -1,8 +1,18 @@
 package main
 
-import "github.com/oayomide/messenger"
+import (
+	"flag"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"time"
 
-var verifyT, accessT, appS
+	"github.com/go-jack/parser"
+	"github.com/messenger"
+)
+
+var verifyT, accessT, appS = parser.GetTokens()
 
 var (
 	verifyToken = flag.String("verify-token", verifyT, "The token used to verify facebook (required)")
@@ -13,7 +23,6 @@ var (
 	port        = flag.Int("port", 4000, "The port used to serve the messenger bot")
 )
 
-
 var bot = messenger.New(messenger.Options{
 	Verify:      *verify,
 	AppSecret:   *appSecret,
@@ -21,7 +30,6 @@ var bot = messenger.New(messenger.Options{
 	Token:       *pageToken,
 	WebhookURL:  "/api/webhook",
 })
-
 
 func main() {
 	flag.Parse()
@@ -34,6 +42,10 @@ func main() {
 		os.Exit(-1)
 	}
 
+	// we want to see if the parser works and returns the persistent menu
+	rs := parser.GetPersistentMenu()
+
+	fmt.Println("HERE IS THE PERSISTENT MENU", rs)
 	// Setup a handler to be triggered when a message is received
 	bot.HandleMessage(func(m messenger.Message, r *messenger.Response) {
 		fmt.Printf("%v (Sent, %v)\n", m.Text, m.Time.Format(time.UnixDate))
