@@ -45,7 +45,7 @@ func Print(level string, message string, rawdata ...string) {
 
 //CreateLogFolder creates the logfile folders 📁
 func CreateLogFolder(fileName string) {
-	err := os.Mkdir("logs"+"/"+fileName, 777)
+	err := os.Mkdir("logs"+"/"+fileName, 0777)
 
 	if err != nil {
 		Print("error", "Folder creating error", err.Error())
